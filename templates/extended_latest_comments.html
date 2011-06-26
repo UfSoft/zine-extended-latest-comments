@@ -1,0 +1,14 @@
+{% extends 'widgets/base.html' %}
+{% block title %}{% trans 'Latest Comments' %}{% endblock %}
+{% block body %}
+  {%- if widget.comments %}
+  <ul>
+  {%- for item in widget.comments %}
+    <li><span>{% trans "by" %} <a href="{{ url_for(item)|e }}">{{
+       item.author|e }}</a>: {{
+         ' '.join((item.body|string).split()[:widget.max_words])
+       }} (<a href="{{ url_for(item)|e }}">...</a>)</span></li>
+  {%- endfor %}
+  </ul>
+  {%- endif %}
+{% endblock %}
